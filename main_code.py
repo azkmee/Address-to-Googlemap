@@ -2,10 +2,13 @@ from selenium import webdriver
 import pandas as pd
 import math
 
+#file name needs to be in the name Flightmap.csv and contains the columns Address that stores the addresses
 data =  pd.read_csv('Flightmap.csv')
 data = data['Address']
 
-set10 = math.ceil(len(data)/10)
+#to get number of tabs as google map only allows max 10 locations
+set10 = math.ceil(len(data)/10) 
+#url goes straight to google map direction
 my_url = 'https://www.google.com.sg/maps/dir///@1.372787,103.9492056,15z/data=!4m2!4m1!3e3'
 press = webdriver.common.keys.Keys
 
@@ -33,7 +36,7 @@ for k in range(set10):
         driver.switch_to.window(driver.window_handles[k])
         driver.get(my_url)
 
-    #select drive setting   
+    #select direction for driving   
     driver.find_elements_by_class_name("directions-drive-icon")[0].click()
 
     for i,j in enumerate(data1):
